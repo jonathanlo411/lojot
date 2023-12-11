@@ -1,10 +1,6 @@
 <script lang='ts'>
     import webconfig from "$webconfig/config.json";
     import PreviewCard from "$lib/client/subdomain-card.svelte";
-
-    let projects: Object[] = webconfig['projects'];
-    let experiments: Object[] = webconfig['experiments'];
-    let schoolwork: Object[] = webconfig['schoolwork'];
 </script>
 
 
@@ -14,6 +10,7 @@
         <p id="description">This site contains information about all the subdomains attached to <a target='_blank' rel='noreferrer' href='https://lojot.com'>lojot.com</a>. The websites list are generally miscellaneous personal projects, schoolwork, things that happen to be attached to my domain.</p>
         
         {#each Object.entries(webconfig) as [topic, domainInfo]}
+            {#if domainInfo.length != 0}
             <!-- {topic} -->
             <div class="card-section">
                 <h2>{topic}</h2>
@@ -23,6 +20,7 @@
                 {/each}
                 </div>
             </div>
+            {/if}
         {/each}
     </div>
 </section>

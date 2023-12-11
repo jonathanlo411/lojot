@@ -11,7 +11,7 @@
     on:click={redirect(name)}
 >
     <h1>{title}</h1>
-    <a href='https://{name}.lojot.com/'>https://{name}.lojot.com/</a>
+    <a href='https://{name}.lojot.com/' target='_blank' rel='noreferrer'>https://{name}.lojot.com/</a>
 </button>
 
 <style>
