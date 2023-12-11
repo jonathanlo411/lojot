@@ -1,63 +1,33 @@
 <script lang='ts'>
-    import webconfig from "$webconfig/config.json";
+    import webconfig from "$webconfig/domains.json";
     import PreviewCard from "$lib/client/subdomain-card.svelte";
 </script>
 
-
 <section>
-    <div id="center">
-        <h1 id="title">Lojot</h1>
-        <p id="description">This site contains information about all the subdomains attached to <a target='_blank' rel='noreferrer' href='https://lojot.com'>lojot.com</a>. The websites list are generally miscellaneous personal projects, schoolwork, things that happen to be attached to my domain.</p>
-        
-        {#each Object.entries(webconfig) as [topic, domainInfo]}
-            {#if domainInfo.length != 0}
-            <!-- {topic} -->
-            <div class="card-section">
-                <h2>{topic}</h2>
-                <div class="card-list">
-                {#each domainInfo as subdomain}
-                    <PreviewCard {...subdomain} />
-                {/each}
-                </div>
+    <p id="description">This site contains information about all the subdomains attached to <a target='_blank' rel='noreferrer' href='https://lojot.com'>lojot.com</a>. The websites list are generally miscellaneous personal projects, schoolwork, things that happen to be attached to my domain. For more information click <a href='/about'>here</a>.</p>
+    {#each Object.entries(webconfig) as [topic, domainInfo]}
+        {#if domainInfo.length != 0}
+        <!-- {topic} -->
+        <div class="card-section">
+            <h2>{topic}</h2>
+            <div class="card-list">
+            {#each domainInfo as subdomain}
+                <PreviewCard {...subdomain} />
+            {/each}
             </div>
-            {/if}
-        {/each}
-    </div>
+        </div>
+        {/if}
+    {/each}
 </section>
 
-
 <style global>
-    /* General Styling */
-    @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
     * {
         box-sizing: border-box;
         margin: 0;
     }
-    :global(body) {
-        /* General Styling */
-        box-sizing: border-box;
-        margin: 0;
+    a, a:visited { color: blue;; }
 
-        /* Color vars */
-        --base-bg: #f8f8f8;
-    }
-    a, a:visited { color: blue; }
-    
-    section {
-		font-family: 'Montserrat', 'Poppins';
-		background-color: var(--base-bg);
-		height: 100vh;
-	}
 
-    #center {
-        width: min(900px, 93.5%);
-        margin: 0 auto;
-    }
-    #title {
-        padding-top: 3rem;
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
     #description {
         font-size: 1.1rem;
     }
@@ -70,7 +40,7 @@
     }
     .card-list {
         display: grid;
-        margin: auto;
+        margin: 0.5rem auto;
         grid-template-columns: repeat(3, 33%);
         grid-auto-rows: 0.5fr;
     }
