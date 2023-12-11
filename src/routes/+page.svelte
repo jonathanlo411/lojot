@@ -27,6 +27,7 @@
 
 
 <style global>
+    /* General Styling */
     @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
     * {
         box-sizing: border-box;
@@ -49,7 +50,7 @@
 	}
 
     #center {
-        width: 900px;
+        width: min(900px, 93.5%);
         margin: 0 auto;
     }
     #title {
@@ -74,4 +75,16 @@
         grid-auto-rows: 0.5fr;
     }
 
+    /* Modile Stuff */
+    @media only screen and (max-width: 600px) {
+        #description {
+            font-size: 1.3rem;
+        }
+
+        .card-list {
+            grid-template-columns: repeat(1, 100%);
+            grid-auto-rows: 0.5fr;
+            padding: 2rem 0;
+        }
+    }
 </style>

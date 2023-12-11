@@ -1,15 +1,12 @@
 <script lang='ts'>
     export let name: String;
     export let title: String;
-    export let description: String | null;
 
-    let redirect = (name: String) => window.open(`https://${name}.lojot.com/`, '_blank')
+    let redirect = (name: String) => () => window.open(`https://${name}.lojot.com/`, '_blank')
 </script>
 
 
-<button class="card"
-    on:click={redirect(name)}
->
+<button class="card" on:click={redirect(name)}>
     <h1>{title}</h1>
     <a>https://{name}.lojot.com/</a>
 </button>
