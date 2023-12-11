@@ -13,35 +13,17 @@
         <h1 id="title">Lojot</h1>
         <p id="description">This site contains information about all the subdomains attached to <a target='_blank' rel='noreferrer' href='https://lojot.com'>lojot.com</a>. The websites list are generally miscellaneous personal projects, schoolwork, things that happen to be attached to my domain.</p>
         
-        <!-- Projects -->
-        <div class="card-section">
-            <h2>Projects</h2>
-            <div class="card-list">
-            {#each projects as subdomain}
-                <PreviewCard {...subdomain} />
-            {/each}
+        {#each Object.entries(webconfig) as [topic, domainInfo]}
+            <!-- {topic} -->
+            <div class="card-section">
+                <h2>{topic}</h2>
+                <div class="card-list">
+                {#each domainInfo as subdomain}
+                    <PreviewCard {...subdomain} />
+                {/each}
+                </div>
             </div>
-        </div>
-
-        <!-- Experiments -->
-        <div class="card-section">
-            <h2>Experiments</h2>
-            <div class="card-list">
-            {#each experiments as subdomain}
-                <PreviewCard {...subdomain} />
-            {/each}
-            </div>
-        </div>
-
-        <!-- Schoolwork -->
-        <div class="card-section">
-            <h2>Schoolwork</h2>
-            <div class="card-list">
-            {#each schoolwork as subdomain}
-                <PreviewCard {...subdomain} />
-            {/each}
-            </div>
-        </div>
+        {/each}
     </div>
 </section>
 
