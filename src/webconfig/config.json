@@ -1,46 +1,29 @@
 {
-    "projects": [
+    "Projects/Hackathon": [
+
+    ],
+    "Experiments": [
+        {
+            "name": "malconnect-buttons",
+            "title": "malConnect Buttons Demo"
+        },
+        {
+            "name": "fuse-playground",
+            "title": "Fuse.js Playground"
+        }
+    ],
+    "Schoolwork": [
         {
             "name": "phil174",
             "title": "PHIL174 Final Project"
         },
         {
-            "name": "avsdf",
-            "title": "PHIt"
+            "name": "ds3starter",
+            "title": "DS3 Starter Project"
         },
         {
-            "name": "phil174",
-            "title": "asassssssssssssssssssssssssssssssssoject",
-            "description": "Cool math games bro lorem20"
-        },
-        {
-            "name": "avsdf",
-            "title": "PHIt"
-        },
-        {
-            "name": "aaaaaaaaaaaaaaaaavsdf",
-            "title": "PHIt"
-        },
-        {
-            "name": "avsdf",
-            "title": "asdasdddddddddddddddddd"
-        }
-    ],
-    "experiments": [
-        {
-            "name": "avsdf",
-            "title": "asdasdddddddddddddddddd"
-        }
-    ],
-    "schoolwork": [
-        {
-            "name": "avsdf",
-            "title": "PHIt"
-        },
-        {
-            "name": "phil174",
-            "title": "asassssssssssssssssssssssssssssssssoject",
-            "description": "Cool math games bro lorem20"
+            "name": "ds3talentday-demo",
+            "title": "DS3 Talent Day Demo Page"
         }
     ]
 }
