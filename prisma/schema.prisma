@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type DomainsExperiments {
+  name  String
+  title String
+}
+
+type DomainsSchoolwork {
+  name  String
+  title String
+}
+
+model domains {
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  Experiments        DomainsExperiments[]
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  Projects_Hackathon Json?                @map("Projects/Hackathon")
+  Schoolwork         DomainsSchoolwork[]
+}
