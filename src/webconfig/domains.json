@@ -10,6 +10,10 @@
         {
             "name": "fuse-playground",
             "title": "Fuse.js Playground"
+        },
+        {
+            "name": "wordcloud-demo",
+            "title": "SDSC Word Cloud Demo"
         }
     ],
     "Schoolwork": [
