@@ -18,7 +18,6 @@
 		"svelte-check": "^3.6.0",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"unplugin-icons": "^0.18.1",
 		"vite": "^4.4.2"
 	},
 	"type": "module",
