@@ -2,9 +2,13 @@
     import Select from 'svelte-select';
     import DomainCard from '$lib/client/admin-domain-card.svelte'
     import type { PageData } from "./$types";
+    import { deserialize } from '$app/forms';
+    import { invalidateAll } from '$app/navigation';
     export let data: PageData;
 
+    let justValue;
     let errorMessage = '';
+    let stdMessage = '';
 
     let topics = data['domains'].map((d: Domain) => d.topic);
     topics = Array.from(new Set(topics));
@@ -23,6 +27,53 @@
             delete i.created;
             return i;
         });
+    }
+
+    async function handleFormSubmit(e: SubmitEvent) {
+        e.preventDefault()
+
+        // Gather targets
+        const nameField: HTMLInputElement = document.querySelector('#name-field-create')!;
+        const titleField: HTMLInputElement = document.querySelector('#title-field-create')!;
+        const topicField: HTMLInputElement = document.querySelector('#topic-field-create')!;
+
+        // Validation
+        if (!nameField.value) {
+            errorMessage = 'Missing Field: Domain'
+            return;
+        } else if (!titleField.value) {
+            errorMessage = 'Missing Field: Title'
+            return;
+        } else if (!justValue) {
+            errorMessage = 'Missing Field: Topic'
+            return;
+        }
+
+        // Send Form
+        const formRes = await fetch(
+            '?/addDomain',
+            {
+                method: 'POST',
+                body: JSON.stringify({ 
+                    name: nameField.value,
+                    title: titleField.value,
+                    topic: justValue
+                })
+            }
+        )
+        const result = deserialize(await formRes.text())['data'];
+        
+        // Update DOM with result
+        if (result.ok && result.msg) {
+            stdMessage = result.msg;
+            await invalidateAll()
+            nameField.value = '';
+            titleField.value = '';
+        } else if (result.msg) {
+            errorMessage = result.msg;
+        } else {
+            errorMessage = 'Something went wrong!'
+        }
     }
 </script>
 
@@ -46,13 +97,15 @@
     </div>
     <hr>
     <div id="add-domain" class="domain-list">
-        <form action="?/addDomain" method="POST">
+        <form action="?/addDomain" method="POST" on:submit={handleFormSubmit}>
             <Select
                 name='topic'
                 class="new-field"
+                id='topic-field-create'
                 on:change={handleChange}
                 on:filter={handleFilter}
                 bind:filterText
+                bind:justValue
                 items={items}
                 placeholder='Topic'
             >
@@ -61,14 +114,17 @@
                     {item.label}
                 </div>
             </Select>
-            <input name='name' placeholder="Domain" class="new-field" type='text' />
-            <input name='title' placeholder="Title" class="new-field" type='text' />
+            <input name='name' id="name-field-create" placeholder="Domain" class="new-field" type='text' />
+            <input name='title' id="title-field-create" placeholder="Title" class="new-field" type='text' />
             <button class="submit-bt" type='submit'><svg xmlns="http://www.w3.org/2000/svg" height='16' width='16' viewBox="0 0 32 32"><path fill="currentColor" d="m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z"/></svg></button>
         </form>
     </div>
 
     {#if errorMessage}
-        <p id='error'>{errorMessage}</p>
+        <p class='message' id='error'>{errorMessage}</p>
+    {/if}
+    {#if stdMessage}
+        <p class='message' id='message'>{stdMessage}</p>
     {/if}
 </section>
 
@@ -124,9 +180,8 @@
         border: 1px solid black;
         background-color: var(--highlight-lighten);
     }
-    #error {
-        background-color: red;
-        color: white;
+
+    .message {
         border-radius: 5px;
         font-weight: bold;
         font-size: 1rem;
@@ -138,5 +193,13 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+        color: white;
+
+    }
+    #error {
+        background-color: red;
+    }
+    #message {
+        background-color: green;
     }
 </style>

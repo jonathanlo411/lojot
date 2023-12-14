@@ -29,20 +29,18 @@ export const load: PageServerLoad = async ({ cookies }) => {
 
 export const actions: Actions = {
     addDomain: async ({ request }) => {
-        const formData = Object.fromEntries(await request.formData())
-        const topicLabel = JSON.parse(formData.topic)['value']
+        const formData = await request.json()
 
         try {
             await prisma.domains.create({
                 data: {
                     name: formData.name,
                     title: formData.title,
-                    topic: topicLabel
+                    topic: formData.topic
                 },
             });
             return {ok: 1, msg: "Update successful!"}
         } catch (error) {
-            console.log(error)
             console.log('\nDatabase addition failed\n')
             return {ok: 0, msg: "Update failed, please try again."}
         }
