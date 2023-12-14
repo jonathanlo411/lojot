@@ -24,11 +24,10 @@
             return i;
         });
     }
-
 </script>
 
 <section>
-    <p>Create, Read, Update, and Destroy events here. Submit all empty fields to delete the entry.</p>
+    <p>Create, Read, Update, and Destroy events here. Submit an empty <b>Domain</b> or <b>Title</b> to delete the entry.</p>
     <h2>Domains</h2>
     <div class="domain-list">
         {#each data['domains'] as domain}
@@ -101,22 +100,30 @@
         border: 1px solid black !important;
     }
 
-    :global(.submit-bt) {
-        display: flex;
+    .submit-bt {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+    .submit-bt svg {
         align-items: center;
         transition: 0.2s;
         border: 1px solid white;
         border-radius: 5px;
         margin: 0.1em 0;
-        background-color: var(--highlight);
         color: white;
+        height: 2rem;
+        width: 2rem;
+        padding: 0.13rem;
+        background-color: var(--highlight);
     }
-    :global(.submit-bt:hover) {
+    .submit-bt svg:hover {
         cursor: pointer;
-        background-color: var(--highlight-lighten);
         border: 1px solid black;
+        background-color: var(--highlight-lighten);
     }
-
     #error {
         background-color: red;
         color: white;
