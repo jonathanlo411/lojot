@@ -9,6 +9,13 @@ declare global {
 	}
 
 	var prisma: PrismaClient
+	
+	interface Domain {
+		id: string,
+		name: String,
+		title: String,
+		topic: String,
+	}
 }
 
 export {};

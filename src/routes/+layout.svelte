@@ -1,7 +1,10 @@
 
 <section>
     <div id="center">
-        <a href='/' id="title">Lojot</a>
+        <div id="nav">
+            <a href='/' id="title">Lojot</a>
+            <a href='/admin'>console</a>
+        </div>
         <slot></slot>
     </div>
 </section>
@@ -20,6 +23,9 @@
 
         /* Color vars */
         --base-bg: #f8f8f8;
+        --border-color: #e6e8ea;
+        --highlight: #2e86df;
+        --highlight-lighten: #79aee4;
     }
     
     section {
@@ -33,13 +39,20 @@
         margin: 0 auto;
         padding-top: 3rem;
     }
-    #title, #title:visited {
-        font-size: 2.5rem;
+
+    #nav {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #title { font-size: 2.5rem;}
+    a, a:visited {
         font-weight: bold;
         color: black;
         text-decoration: none;
     }
-    #title:hover {
+    a:hover {
         text-decoration: underline;
         cursor: pointer;
     }
