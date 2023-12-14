@@ -3,7 +3,7 @@
     <div id="center">
         <div id="nav">
             <a href='/' id="title">Lojot</a>
-            <a href='/admin'>console</a>
+            <a href='/auth'>console</a>
         </div>
         <slot></slot>
     </div>

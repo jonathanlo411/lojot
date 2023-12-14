@@ -13,3 +13,8 @@ model domains {
   title String
   topic String
 }
+
+model userAuth {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  ttl   DateTime
+}
