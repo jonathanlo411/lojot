@@ -46,8 +46,7 @@ export const actions: Actions = {
         }
     },
     updateDomain: async ({ request }) => {
-        const formData = Object.fromEntries(await request.formData())
-        const topicLabel = (formData.topic) ? JSON.parse(formData.topic)['value'] : ''
+        const formData = await request.json()
     
         if (formData.title && formData.name) {  // Updating DB
             try {
@@ -56,7 +55,7 @@ export const actions: Actions = {
                     data: {
                         name: formData.name,
                         title: formData.title,
-                        topic: topicLabel
+                        topic: formData.topic
                     }
                 })
                 return {ok: 1, msg: "Update successful!"}

@@ -6,7 +6,7 @@
     import { invalidateAll } from '$app/navigation';
     export let data: PageData;
 
-    let justValue;
+    let justValue: String;
     let errorMessage = '';
     let stdMessage = '';
 
@@ -75,6 +75,16 @@
             errorMessage = 'Something went wrong!'
         }
     }
+
+    async function handleSendMessage(e: any) {
+        if (e.detail.ok) {
+            stdMessage = e.detail.msg
+        } else {
+            errorMessage = e.detail.msg
+        }
+        await invalidateAll()
+    }
+
 </script>
 
 <section>
@@ -90,6 +100,7 @@
                         title={domain.title}
                         topic={domain.topic}
                         topicList={items}
+                        on:sendMessage={handleSendMessage}
                     />
                 </div>
             </div>

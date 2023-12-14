@@ -1,5 +1,7 @@
 <script lang='ts'>
     import Select from 'svelte-select';
+    import { createEventDispatcher, type EventDispatcher } from 'svelte';
+    import { deserialize } from '$app/forms';
 
     export let id: String;
     export let name: String;
@@ -7,7 +9,11 @@
     export let topic: String;
     export let topicList: Object[];
 
+
+
     let filterText = '';
+    let justValue: String;
+    const dispatch: EventDispatcher = createEventDispatcher();
 
     function handleFilter(e: CustomEvent) {        
         if (e.detail.length === 0 && filterText.length > 0) {
@@ -39,10 +45,51 @@
             destroy.style.display = 'none'
         }
     }
+
+    async function handleFormSubmit(e: SubmitEvent) {
+        e.preventDefault()
+
+        // Gather targets
+        const nameField: HTMLInputElement = document.querySelector(`#name-field-${id}`)!;
+        const titleField: HTMLInputElement = document.querySelector(`#title-field-${id}`)!;
+
+        // Send Form
+        const formRes = await fetch(
+            '?/updateDomain',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: id,
+                    name: nameField.value,
+                    title: titleField.value,
+                    topic: topic
+                })
+            }
+        )
+        const result = deserialize(await formRes.text())['data'];
+        
+        // Update DOM with result
+        if (result.ok && result.msg) {
+            dispatch('sendMessage', {
+                msg: result.msg,
+                ok: 1
+            })
+        } else if (result.msg) {
+            dispatch('sendMessage', {
+                msg: result.msg,
+                ok: 0
+            })
+        } else {
+            dispatch('sendMessage',{
+                msg: result.msg,
+                ok: 0
+            })
+        }
+    }
 </script>
 
 <div>
-    <form action="?/updateDomain" method="POST" class="updateDomain">
+    <form action="?/updateDomain" method="POST" class="updateDomain" on:submit={handleFormSubmit}>
         <input type="hidden" name="id" value={id} />
         <Select
             name='topic'
@@ -50,6 +97,7 @@
             on:change={handleChange}
             on:filter={handleFilter}
             bind:filterText
+            bind:justValue
             items={topicList}
             value={topic}
         >
