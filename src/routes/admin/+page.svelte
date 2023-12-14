@@ -4,6 +4,8 @@
     import type { PageData } from "./$types";
     export let data: PageData;
 
+    let errorMessage = '';
+
     let topics = data['domains'].map((d: Domain) => d.topic);
     topics = Array.from(new Set(topics));
     let items = topics.map((d) => {return { value: d, label: d}})
@@ -26,7 +28,7 @@
 </script>
 
 <section>
-    <p>Create, Read, Update, and Destroy events here. Submit empty all empty fields to delete the entry.</p>
+    <p>Create, Read, Update, and Destroy events here. Submit all empty fields to delete the entry.</p>
     <h2>Domains</h2>
     <div class="domain-list">
         {#each data['domains'] as domain}
@@ -61,10 +63,14 @@
                 </div>
             </Select>
             <input name='name' placeholder="Domain" class="new-field" type='text' />
-            <input name='tite' placeholder="Title" class="new-field" type='text' />
+            <input name='title' placeholder="Title" class="new-field" type='text' />
             <button class="submit-bt" type='submit'><svg xmlns="http://www.w3.org/2000/svg" height='16' width='16' viewBox="0 0 32 32"><path fill="currentColor" d="m13 24l-9-9l1.414-1.414L13 21.171L26.586 7.586L28 9z"/></svg></button>
         </form>
     </div>
+
+    {#if errorMessage}
+        <p id='error'>{errorMessage}</p>
+    {/if}
 </section>
 
 <style>
@@ -88,6 +94,7 @@
         border-radius: 5px;
         border: 1px solid var(--border-color) !important;
         transition: 0.15s !important;
+        padding-left: 0.5rem !important;
     }
     :global(.new-field:hover) {
         cursor: pointer;
@@ -100,7 +107,7 @@
         transition: 0.2s;
         border: 1px solid white;
         border-radius: 5px;
-        margin: 0.1rem 0;
+        margin: 0.1em 0;
         background-color: var(--highlight);
         color: white;
     }
@@ -108,5 +115,21 @@
         cursor: pointer;
         background-color: var(--highlight-lighten);
         border: 1px solid black;
+    }
+
+    #error {
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+        position: absolute;
+        bottom: 3rem; 
+        left: 50%;
+        transform: translate(-50%, 0);
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
     }
 </style>

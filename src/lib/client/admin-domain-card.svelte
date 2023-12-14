@@ -64,6 +64,7 @@
         border-radius: 5px !important;
         transition: 0.15s !important;
         outline: none !important;
+        padding-left: 0.5rem !important;
     }
     :global(.cur-field:hover) {
         cursor: pointer;

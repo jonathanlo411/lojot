@@ -29,17 +29,53 @@ export const load: PageServerLoad = async ({ cookies }) => {
 
 export const actions: Actions = {
     addDomain: async ({ request }) => {
-        console.log(Object.fromEntries(await request.formData()))
+        const formData = Object.fromEntries(await request.formData())
+        const topicLabel = JSON.parse(formData.topic)['value']
+
+        try {
+            await prisma.domains.create({
+                data: {
+                    name: formData.name,
+                    title: formData.title,
+                    topic: topicLabel
+                },
+            });
+            return {ok: 1, msg: "Update successful!"}
+        } catch (error) {
+            console.log(error)
+            console.log('\nDatabase addition failed\n')
+            return {ok: 0, msg: "Update failed, please try again."}
+        }
     },
     updateDomain: async ({ request }) => {
-        let formData = Object.fromEntries(await request.formData())
-        try {
-            // Checking Data exists in DB
-            await prisma.domains.findFirstOrThrow({where: { id: formData.id }})
-            console.log('jhere')
-            throw new Error()
-        } catch {
-            console.log('\nDatabase update failed\n')
+        const formData = Object.fromEntries(await request.formData())
+        const topicLabel = (formData.topic) ? JSON.parse(formData.topic)['value'] : ''
+    
+        if (formData.title && formData.name) {  // Updating DB
+            try {
+                await prisma.domains.update({
+                    where: { id: formData.id },
+                    data: {
+                        name: formData.name,
+                        title: formData.title,
+                        topic: topicLabel
+                    }
+                })
+                return {ok: 1, msg: "Update successful!"}
+            } catch {
+                console.log('\nDatabase update failed\n')
+                return {ok: 0, msg: "Update failed, please try again."}
+            }
+        } else {                                // Deleting Data
+            try {
+                await prisma.domains.delete({
+                    where: { id: formData.id }
+                })
+                return {ok: 1, msg: "Delete successful!"}
+            } catch {
+                console.log('\nDatabase delete failed\n')
+                return {ok: 0, msg: "Delete failed, please try again."}
+            }
         }
     }
 }
