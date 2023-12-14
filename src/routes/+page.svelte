@@ -1,15 +1,29 @@
 <script lang='ts'>
-    import webconfig from "$webconfig/domains.json";
     import PreviewCard from "$lib/client/subdomain-card.svelte";
     import type { PageData } from "./$types";
 
     export let data: PageData;
-    // console.log(data['domains'])
+
+    function groupByTopic(domains: Domain[]) {
+        return domains.reduce((grouped, domain) => {
+            const { topic, ...rest } = domain;
+
+            if (!grouped[topic]) {
+                grouped[topic] = [];
+            }
+
+            grouped[topic].push({ ...rest }); 
+
+            return grouped;
+        }, {});
+    }
+
+    let groupedDomains = groupByTopic(data.domains);
 </script>
 
 <section>
     <p id="description">This site contains information about all the subdomains attached to <a target='_blank' rel='noreferrer' href='https://lojot.com'>lojot.com</a>. The websites list are generally miscellaneous personal projects, schoolwork, things that happen to be attached to my domain. For more information click <a href='/about'>here</a>.</p>
-    {#each Object.entries(data['domains']) as [topic, domainInfo]}
+    {#each Object.entries(groupedDomains) as [topic, domainInfo]}
         {#if topic != 'id' && domainInfo.length != 0}
         <!-- {topic} -->
         <div class="card-section">

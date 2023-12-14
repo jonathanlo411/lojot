@@ -1,14 +1,15 @@
 <script lang='ts'>
     export let name: String;
     export let title: String;
+    export let id: String;
 
     let redirect = (name: String) => () => window.open(`https://${name}.lojot.com/`, '_blank')
 </script>
 
 
-<button class="card" on:click={redirect(name)}>
+<button class="card {id}" on:click={redirect(name)}>
     <h1>{title}</h1>
-    <a>https://{name}.lojot.com/</a>
+    <p id="psuedo-link">https://{name}.lojot.com/</p>
 </button>
 
 <style>
@@ -40,5 +41,5 @@
     .card h1 {
         font-size: 1rem;
     }
-    a, a:visited { color: blue; }
+    #psuedo-link, #psuedo-link:visited { color: blue; }
 </style>
