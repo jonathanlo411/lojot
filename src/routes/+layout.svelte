@@ -3,7 +3,7 @@
     <div id="center">
         <div id="nav">
             <a href='/' id="title">Lojot</a>
-            <a href='/auth'>console</a>
+            <a id="console" href='/auth'>console</a>
         </div>
         <slot></slot>
     </div>
@@ -46,6 +46,7 @@
         align-items: center;
         justify-content: space-between;
     }
+    #console { margin-right: 1rem; } 
     #title { font-size: 2.5rem;}
     a, a:visited {
         font-weight: bold;

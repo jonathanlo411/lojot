@@ -22,7 +22,6 @@
             return i;
         });
     }
-    console.log(topicList)
 </script>
 
 <div>

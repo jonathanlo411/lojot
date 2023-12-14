@@ -3,5 +3,6 @@
     "What is the purpose of this?": "To keep track of all my subdomains.",
     "Who are you?": "I'm Jonathan Lo. The Domain 'Lojot' is a cut mashup of my name.",
     "How can I contact you?": "jolo@ucsd.edu, jonathanlo411@gmail.com",
-    "How do I use the API?": "Simpily send a a GET request to lojot.com/api."
+    "How do I use the API?": "Simpily send a a GET request to lojot.com/api.",
+    "What is the console?": "For me, don't worry about it :)"
 }
