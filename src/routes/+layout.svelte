@@ -20,6 +20,7 @@
         /* General Styling */
         box-sizing: border-box;
         margin: 0;
+		background-color: var(--base-bg);
 
         /* Color vars */
         --base-bg: #f8f8f8;

@@ -213,4 +213,22 @@
     #message {
         background-color: green;
     }
+
+    @media only screen and (max-width: 600px) {
+        :global(.new-field) {
+            width: 100% !important;
+            margin: 0.3rem auto !important;
+            padding: 1rem 0 !important;
+        }
+
+        :global(#add-domain form) {
+            flex-direction: column !important;
+            margin: 3rem 0 !important;
+        }
+
+        :global(.submit-bt svg) {
+            width: 100% !important;
+            padding: 0.5rem 0 !important;
+        }
+    }
 </style>

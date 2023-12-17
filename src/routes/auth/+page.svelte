@@ -111,4 +111,14 @@
         align-items: center;
         justify-content: space-evenly;
     }
+
+    /* Modile Stuff */
+    @media only screen and (max-width: 600px) {
+        #login-module {
+            width: 100%;
+        }
+        #login-module input, button {
+            padding: 1rem;
+        }
+    }
 </style>

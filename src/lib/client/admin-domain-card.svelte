@@ -166,4 +166,22 @@
     .delete { background-color: red; display: none; }
     .update:hover { background-color: var(--highlight-lighten); }
     .delete:hover { background-color: rgb(248, 70, 70); }
+
+    @media only screen and (max-width: 600px) {
+        :global(.cur-field) {
+            width: 100% !important;
+            margin: 0.3rem auto !important;
+            padding: 1rem 0 !important;
+        }
+
+        :global(.updateDomain) {
+            flex-direction: column !important;
+            margin: 3rem 0 !important;
+        }
+
+        :global(.mod-bt svg) {
+            width: 100% !important;
+            padding: 0.5rem 0 !important;
+        }
+    }
 </style>
