@@ -88,7 +88,7 @@
 </script>
 
 <section>
-    <p>Create, Read, Update, and Destroy events here. Submit an empty <b>Domain</b> or <b>Title</b> to delete the entry. Edit DNS <a href="https://red-sailfish-ttag.squarespace.com/config/domains/managed/lojot.com/dns-settings" target="_blank" rel="noreferrer">here</a>.</p>
+    <p>Create, Read, Update, and Destroy events here. Submit an empty <b>Domain</b> or <b>Title</b> to delete the entry. Edit DNS <a href="https://account.squarespace.com/domains/managed/lojot.com/dns/dns-settings" target="_blank" rel="noreferrer">here</a>.</p>
     <h2>Domains</h2>
     <div class="domain-list">
         {#each data['domains'] as domain}
